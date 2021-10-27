@@ -1,0 +1,54 @@
+﻿@using Desafio.Models;
+@model List<RestauranteViewModel>
+
+<div class="col-xs-12">
+    <div class="table-responsive">
+        <table class="table table-striped table-condensed table-hover table-click" id="restaurantesTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nome</th>
+                    <th>Hora de abertura</th>
+                    <th>Hora de fechamento</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td></td>
+                        <td>@item.Name</td>
+                        <td>@item.HoraAbertura.ToString(@"hh\:mm")</td>
+                        <td>@item.HoraFechamento.ToString(@"hh\:mm")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var restaurantesTable;
+    restaurantesTable = $('#restaurantesTable').DataTable({
+        destroy: true,
+        paging: true,
+        order: [],
+        lengthChange: true,
+        stateSave: true,
+        searching: false,
+        responsive: true,
+        "autoWidth": true,
+        "bPaginate": true,
+        columns: [
+            {   // Responsive control column
+                data: null,
+                defaultContent: '',
+                className: 'control',
+                orderable: false
+            },
+            null,
+            null,
+            null
+        ]
+    });
+</script>

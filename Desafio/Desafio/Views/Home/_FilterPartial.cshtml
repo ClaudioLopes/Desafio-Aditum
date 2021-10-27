@@ -1,0 +1,39 @@
+﻿<div id="filter">
+    <fieldset id="form">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+                <div class="form-group">
+                    <label>Hora:</label>
+                    <input type="time" id="hora" name="hora">
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <div class="pull-right">
+                    <button onclick="Filter();" id="submit" class="btn btn-primary">Filtrar</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<script type="text/javascript">
+    function Filter() {
+        if ($("#hora").val() == "") {
+            swal("Escolha a hora");
+        } else {
+            $.ajax({
+                url: '@Url.Action("Filter", "Home")',
+                data: {
+                    'hora': $("#hora").val()
+                },
+                success: function (response) {
+                    $('#reload').html(response);
+                },
+                failure: function (response) {
+                    swal(response.statusText);
+                }
+            });
+        }
+    }
+</script>
